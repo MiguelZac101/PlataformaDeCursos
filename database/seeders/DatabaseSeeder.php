@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
+use Illuminate\Support\Facades\Storage;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -13,6 +15,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        //eliminar carpeta public/storage si existe
+        Storage::deleteDirectory('cursos');
+        //crea carpeta en public/storage
+        Storage::makeDirectory('cursos');
+
+        $this->call(UserSeeder::class);
+        $this->call(LevelSeeder::class);
+        $this->call(CategorySeeder::class);
+        $this->call(PriceSeeder::class);
+
+        $this->call(PlatformSeeder::class);//se utiliza en Course por eso debe ir antes
+        $this->call(CourseSeeder::class);
     }
 }
