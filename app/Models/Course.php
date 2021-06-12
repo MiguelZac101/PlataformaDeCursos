@@ -10,10 +10,24 @@ class Course extends Model
     use HasFactory;
 
     protected $guarded = ['id','status'];
+    //contador
+    //agrega el campo students_count con la cantidad de relaciones q devuelve students()
+    // igual para reviews
+    protected $withCount = ['students','reviews'];
 
     const BORRADOR = 1;
     const REVISION = 2;
     const PUBLICADO = 3;
+
+    //get[Rating]Attribute -> nombre atributo : rating
+    //Course::find(2)->rating; (asi lo llama)
+    public function getRatingAttribute(){
+        if($this->reviews_count){
+            return round($this->reviews->avg('rating'),1);
+        }else{
+            return 5;
+        }        
+    }
 
     //relación uno a muchos
     public function reviews(){
