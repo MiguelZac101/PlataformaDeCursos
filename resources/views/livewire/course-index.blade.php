@@ -1,37 +1,42 @@
 <div>
     <div>
         <div>
-            <button>Todos</button>
+            <button wire:click="resetFilters">Todos</button>
             <div>
                 <button>Categoria</button>
                 <div>
-                    <a href="">categoria1</a>
-                    <a href="">categoria2</a>
+                    @foreach ($categories as $category )
+                        <a wire:click="$set('category_id',{{$category->id}})">
+                            {{$category->name}}
+                        </a>
+                        <br>
+                    @endforeach
                 </div>
             </div>
             <div>
                 <button>Nieveles</button>
                 <div>
-                    <a href="">categoria1</a>
-                    <a href="">categoria2</a>
+                    @foreach ($levels as $level )
+                    <a wire:click="$set('level_id',{{$level->id}})">
+                        {{$level->name}}
+                    </a>
+                    <br>
+                @endforeach
                 </div>
             </div>
         </div>
     </div>
+    <hr>
+    <p>
+        category_id : {{$category_id}}
+    </p>
+    <p>
+        level_id : {{$level_id}}
+    </p>
+    <hr><br>
     <div class="px-4 grid grid-cols-4 gap-6">
         @foreach ($courses as $course)
-            <article>
-                <img src="{{Storage::url($course->image->url)}}" alt="">
-                <div>
-                    <h1>{{Str::limit($course->title,40)}}</h1>
-                    <p>Teacher : {{$course->teacher->name}}</p>
-                    <p>Rating : {{$course->rating}}</p>
-                    <p>Students : {{$course->students_count}}</p>
-                    <a href="{{route('courses.show',$course)}}">
-                        Más información
-                    </a>
-                </div>
-            </article>
+            <x-course-card :course="$course"/>
         @endforeach
     </div>
     <div>
