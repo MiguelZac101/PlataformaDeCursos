@@ -7,10 +7,7 @@
             <p>
                 Subtitulo
             </p>
-            <div>
-                <input type="text">
-                <button>Buscar</button>
-            </div>
+            @livewire('search')
         </div>
     </section>
     <section class="mt-24">
