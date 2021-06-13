@@ -33374,6 +33374,14 @@ select {
   --tw-backdrop-sepia: sepia(100%);
 }
 
+.zpointer{
+  cursor: pointer;
+}
+
+.zviolet{
+  background-color: blueviolet;
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;
@@ -195823,4 +195831,3 @@ select {
     --tw-backdrop-sepia: sepia(100%);
   }
 }
-

@@ -1,12 +1,12 @@
 <div>
     <div>
         <div>
-            <button wire:click="resetFilters">Todos</button>
+            <button wire:click="resetFilters" class="zviolet">Todos</button>
             <div>
                 <button>Categoria</button>
                 <div>
                     @foreach ($categories as $category )
-                        <a wire:click="$set('category_id',{{$category->id}})">
+                        <a wire:click="$set('category_id',{{$category->id}})" class="zpointer">
                             {{$category->name}}
                         </a>
                         <br>
@@ -17,7 +17,7 @@
                 <button>Nieveles</button>
                 <div>
                     @foreach ($levels as $level )
-                    <a wire:click="$set('level_id',{{$level->id}})">
+                    <a wire:click="$set('level_id',{{$level->id}})" class="zpointer">
                         {{$level->name}}
                     </a>
                     <br>
