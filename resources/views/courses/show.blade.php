@@ -82,9 +82,17 @@
                             </a>
                         </div>
                     </div>
-                    <a href="">
-                        Llevar este curso
-                    </a>
+                    <!--Policies/CoursePolicy.php-->
+                    @can('enrolled',$course)
+                        <a href="{{route('course.status',$course)}}">
+                            Continuar con el curso
+                        </a>
+                    @else
+                        <form action="{{route('course.enrolled',$course)}}" method="POST">
+                            @csrf
+                            <button>Llevar este curso</button>
+                        </form>
+                    @endcan
                 </div>
             </section>
             <aside>

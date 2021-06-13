@@ -23,4 +23,10 @@ class CourseController extends Controller
 
         return view('courses.show',compact('course','similares'));
     }
+
+    public function enrolled(Course $course){
+        //añadir registro en tabla intermedia
+        $course->students()->attach(auth()->user()->id);
+        return redirect()->route('course.status',$course);
+    }
 }
