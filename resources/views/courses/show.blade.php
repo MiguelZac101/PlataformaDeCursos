@@ -84,7 +84,7 @@
                     </div>
                     <!--Policies/CoursePolicy.php-->
                     @can('enrolled',$course)
-                        <a href="{{route('course.status',$course)}}">
+                        <a href="{{route('courses.status',$course)}}">
                             Continuar con el curso
                         </a>
                     @else

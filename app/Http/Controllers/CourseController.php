@@ -29,4 +29,5 @@ class CourseController extends Controller
         $course->students()->attach(auth()->user()->id);
         return redirect()->route('course.status',$course);
     }
+
 }
