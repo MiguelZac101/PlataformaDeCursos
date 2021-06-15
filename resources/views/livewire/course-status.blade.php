@@ -3,6 +3,17 @@
         <div class="col-span-2">
             {!!$current->iframe!!}
             {{$current->name}}
+            <p>index: {{$this->index}}</p>
+            <p>previus: 
+                @if ($this->previus)
+                    {{$this->previus->id}}    
+                @endif                
+            </p>
+            <p>next: 
+                @if ($this->next)
+                    {{$this->next->id}}
+                @endif                
+            </p>
         </div>
         <div class="card">
             <div>
@@ -23,8 +34,8 @@
                             <ul>
                                 @foreach ($section->lessons as $lesson)
                                     <li>
-                                        <a href="">
-                                            {{$lesson->name}}
+                                        <a wire:click="changeLesson({{$lesson}})">
+                                            {{$lesson->id}}-{{$lesson->name}}
                                             @if ($lesson->completed)
                                                 Completado
                                             @endif
