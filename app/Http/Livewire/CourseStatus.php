@@ -22,6 +22,10 @@ class CourseStatus extends Component
                 break;
             }
         }
+        //caso todas las lecciones marcadas
+        if(!$this->current){
+            $this->current = $course->lessons->last();
+        }
     }
 
     public function render()
@@ -29,9 +33,26 @@ class CourseStatus extends Component
         return view('livewire.course-status');
     }
 
+    //Metodos
+
     public function changeLesson(Lesson $lesson){
         $this->current = $lesson;        
     }
+
+    public function completed(){
+        if($this->current->completed){
+            //Eliminar registro
+            $this->current->users()->detach(auth()->user()->id);
+        }else{
+            //Agregar registro
+            $this->current->users()->attach(auth()->user()->id);
+        }
+        //volver a carga de la BD para q actualiza los cambios
+        $this->current = Lesson::find($this->current->id);
+        $this->course = Course::find($this->course->id);
+    }
+
+    //propiedades computadas
 
     public function getIndexProperty(){
         return $this->course->lessons->pluck('id')->search($this->current->id);
@@ -51,5 +72,19 @@ class CourseStatus extends Component
         }else{
             return $this->course->lessons[$this->index +1];
         }
+    }
+
+    //avance porcentual
+    public function getAdvanceProperty(){
+        $i = 0;
+
+        foreach ($this->course->lessons as $lesson) {
+            if($lesson->completed){
+                $i++;
+            }
+        }
+
+        $advance = ($i * 100)/($this->course->lessons->count());
+        return round($advance,2);
     }
 }

@@ -3,17 +3,41 @@
         <div class="col-span-2">
             {!!$current->iframe!!}
             {{$current->name}}
-            <p>index: {{$this->index}}</p>
-            <p>previus: 
+            @if ($current->description)
+                <div>{{$current->description->name}}</div>
+            @endif
+            <p>index: {{$this->index}} 
+                previus: 
                 @if ($this->previus)
                     {{$this->previus->id}}    
                 @endif                
-            </p>
-            <p>next: 
+                next: 
                 @if ($this->next)
                     {{$this->next->id}}
                 @endif                
             </p>
+
+            <a wire:click="completed">
+                Completado (
+                    @if($current->completed)
+                        on
+                    @else
+                        off
+                    @endif
+                )
+            </a>
+
+            <div>
+                <div>
+                    @if ($this->previus)
+                        <a wire:click="changeLesson({{$this->previus}})">Tema anterior</a>                        
+                    @endif 
+                    -
+                    @if ($this->next)
+                        <a wire:click="changeLesson({{$this->next}})">Tema siguiente</a>                        
+                    @endif 
+                </div>
+            </div>
         </div>
         <div class="card">
             <div>
@@ -25,6 +49,7 @@
                     <div>
                         <p>{{$course->teacher->name}}</p>
                         <a href="{{Str::slug($course->teacher->name,'')}}"></a>
+                        <p>avance : {{$this->advance}}%</p>
                     </div>
                 </div>
                 <ul>
@@ -37,7 +62,7 @@
                                         <a wire:click="changeLesson({{$lesson}})">
                                             {{$lesson->id}}-{{$lesson->name}}
                                             @if ($lesson->completed)
-                                                Completado
+                                                (Completado)
                                             @endif
                                         </a>
                                     </li>

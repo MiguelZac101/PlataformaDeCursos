@@ -18,7 +18,7 @@ class Lesson extends Model
 
     //relación uno a uno
     public function description(){
-        return $this->hasMany('App\Models\Description');
+        return $this->hasOne('App\Models\Description');
     }
 
     //Relación uno a muchos inversa
