@@ -14,6 +14,9 @@ class CourseController extends Controller
 
     public function show(Course $course){
         
+        //verificar q solo se muestren cursos publicados
+        $this->authorize('published',$course);
+        
         $similares = Course::where('category_id',$course->category_id)
             ->where('id','!=',$course->id)
             ->where('status',3)

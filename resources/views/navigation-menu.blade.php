@@ -9,8 +9,7 @@
             'name' => 'Cursos',
             'route' => route('courses.index'),
             'active' => request()->routeIs('courses.index')
-        ]
-        
+        ]        
     ];
 @endphp
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
@@ -27,20 +26,24 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    @foreach ( $nav_links as $link )
-                        <x-jet-nav-link href="{{ $link->route }}" :active="{{ $link->active }}">
-                            {{ __($link->name) }}
+                    @foreach ($nav_links as $nav_link)
+                    
+                        <x-jet-nav-link href="{{ $nav_link['route'] }}" :active="$nav_link['active']">
+                            {{ $nav_link['name'] }}
                         </x-jet-nav-link>
+
                     @endforeach
+                   <!-- 
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
+                -->
                 </div>
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <!-- Teams Dropdown -->
-                @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
+                @if(Laravel\Jetstream\Jetstream::hasTeamFeatures())
                     <div class="ml-3 relative">
                         <x-jet-dropdown align="right" width="60">
                             <x-slot name="trigger">

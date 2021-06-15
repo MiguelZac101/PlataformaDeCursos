@@ -7,8 +7,13 @@ use Livewire\Component;
 use App\Models\Course;
 use App\Models\Lesson;
 
+//para usar policies
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+
 class CourseStatus extends Component
 {
+    use AuthorizesRequests;
+
     public $course;
     public $current;
 
@@ -26,6 +31,10 @@ class CourseStatus extends Component
         if(!$this->current){
             $this->current = $course->lessons->last();
         }
+
+        //llama a policies/CoursePoliciy.php -> enrolled
+        //si no esta autorizado lanza error 403 (esta acción no esta autorizada)
+        $this->authorize('enrolled',$course);
     }
 
     public function render()

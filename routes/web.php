@@ -27,5 +27,5 @@ Route::get('cursos/{course}',[CourseController::class,'show'] )->name('courses.s
 Route::post('cursos/{course}/enrolled',[CourseController::class,'enrolled'] )->middleware('auth')->name('course.enrolled');
 //ruta a componente livewire
 //carga automaticamente el views/layouts/app y mete el contenido en slot
-Route::get('course-status/{course}',CourseStatus::class)->name('courses.status');
+Route::get('course-status/{course}',CourseStatus::class)->name('courses.status')->middleware('auth');
 //Route::get('course-status/{course}',[CourseController::class,'status'])->name('courses.status');
