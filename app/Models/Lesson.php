@@ -10,6 +10,11 @@ class Lesson extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+    
+    //get[NombreVariable]Attribute
+    public function getCompletedAttribute(){
+        return $this->users->contains(auth()->user()->id);
+    }
 
     //relación uno a uno
     public function description(){
