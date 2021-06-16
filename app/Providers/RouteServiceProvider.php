@@ -56,6 +56,7 @@ class RouteServiceProvider extends ServiceProvider
             
             //ruta instructor
             Route::middleware('web','auth')
+                ->name('instructor.')
                 ->prefix('instructor') //ruta admin/
                 ->namespace($this->namespace)
                 ->group(base_path('routes/instructor.php'));
