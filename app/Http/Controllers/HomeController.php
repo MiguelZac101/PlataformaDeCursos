@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function __invoke(){
+    public function index(){
         //$courses = Course::all();
         
         $courses = Course::where('status',3)->latest('id')->get()->take(8);
