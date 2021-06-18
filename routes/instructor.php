@@ -5,5 +5,5 @@ use App\Http\Livewire\InstructorCourses;
 
 //redirigir ruta
 Route::redirect('', 'instructor/courses');
-
-Route::get('courses', InstructorCourses::class)->name('courses.index');
+//middleware restrige ruta por permiso can:nombrepermiso
+Route::get('courses', InstructorCourses::class)->middleware('can:Leer Cursos')->name('courses.index');

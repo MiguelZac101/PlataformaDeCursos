@@ -123,10 +123,19 @@
                             <x-jet-dropdown-link href="{{ route('profile.show') }}">
                                 {{ __('Profile') }}
                             </x-jet-dropdown-link>
-
-                            <x-jet-dropdown-link href="{{ route('instructor.courses.index') }}">
-                                Instructor
-                            </x-jet-dropdown-link>
+                            
+                            <!--permiso-->
+                            @can('Leer Cursos')
+                                <x-jet-dropdown-link href="{{ route('instructor.courses.index') }}">
+                                    Instructor
+                                </x-jet-dropdown-link>
+                            @endcan  
+                            
+                            @can('Ver Dashboard')
+                                <x-jet-dropdown-link href="{{ route('admin.home') }}">
+                                    Admin
+                                </x-jet-dropdown-link>
+                            @endcan 
 
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                                 <x-jet-dropdown-link href="{{ route('api-tokens.index') }}">

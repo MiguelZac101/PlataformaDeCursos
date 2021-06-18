@@ -250,16 +250,19 @@ return [
             'text'        => 'Dashboard',
             'route'         => 'admin.home',
             'icon'        => 'far fa-fw fa-file',
+            'can'   => 'Ver Dashboard'
         ],
         [
             'text'        => 'Roles',
             'route'         => 'admin.roles.index',
             'icon'        => 'far fa-fw fa-file',
+            'can'   =>  'Listar Rol'
         ],
         [
             'text'        => 'Users',
             'route'         => 'admin.users.index',
             'icon'        => 'far fa-fw fa-file',
+            'can'   => 'Leer Usuarios',
             'active' => ['admin/users*']
         ],
         ['header' => 'account_settings'],
