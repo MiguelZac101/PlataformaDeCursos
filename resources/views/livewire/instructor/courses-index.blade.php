@@ -13,6 +13,7 @@
             <th>rating</th>
             <th>Status</th>
             <th>@ slot</th>
+            <th></th>            
         </tr>
         @foreach ($courses as $course)
             <x-instructor-course-tr :course="$course">
@@ -20,7 +21,7 @@
             </x-instructor-course-tr>
         @endforeach
         <tr>
-            <td colspan="7">{{$courses->links()}}</td>
+            <td colspan="8">{{$courses->links()}}</td>
         </tr>
     </table>     
     @else

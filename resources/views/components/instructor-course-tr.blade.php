@@ -9,4 +9,7 @@
     <td>{{$course->rating}}</td>
     <td>{{$course->status}}</td>
     <td>{{$slot}}</td>
+    <td>
+        <a href="{{route('instructor.courses.edit',$course)}}">Editar</a>
+    </td>
 </tr>

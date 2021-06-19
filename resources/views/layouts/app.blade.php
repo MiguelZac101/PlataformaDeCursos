@@ -44,5 +44,12 @@
         @stack('modals')
 
         @livewireScripts
+
+        <!-- pinta el contenido dentro de <x-slot name="js">, 
+            views/instructor/courses/edit.blade.php -->
+        @isset($js)
+            {{$js}}
+        @endisset
+
     </body>
 </html>
