@@ -16,7 +16,9 @@ class CoursesIndex extends Component
     public function render()
     {
         //$courses = Course::where('user_id',auth()->user()->id)->get();
-        $courses = Course::where('title','LIKE','%'.$this->search.'%')->paginate(10);
+        $courses = Course::where('title','LIKE','%'.$this->search.'%')
+                ->latest('id')
+                ->paginate(10);
         return view('livewire.instructor.courses-index',compact('courses'));
     }
 

@@ -3,7 +3,7 @@
         <div class="py-8">
             <h1 class="text-2x1 font-bold">NUEVO CURSO</h1>
             <hr>
-            {!! Form::open(['route'=>'instructor.courses.store','files'=>true]) !!}
+            {!! Form::open(['route'=>'instructor.courses.store','files'=>true,'autocomplete'=>'off']) !!}
 
                 @include('instructor.courses.partials.form')
                 
