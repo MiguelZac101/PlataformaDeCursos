@@ -55,6 +55,10 @@
     </figure>
     <div>
         <p class="mb-2">asdasd</p>
-        {!! Form::file('file', ['class' => 'form-input w-full','id'=>'file']) !!}
+        {!! Form::file('file', ['class' => 'form-input w-full'.($errors->has('file')?' border-red-600':''),'id'=>'file','accept'=>'image/*']) !!}
+        
+        @error('file')
+            <strong class="text-xs text-red-600">{{$message}}</strong>
+        @enderror
     </div>
 </div>

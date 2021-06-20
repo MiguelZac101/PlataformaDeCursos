@@ -55,7 +55,8 @@ class CourseController extends Controller
             'description' => 'required',
             'category_id' => 'required',
             'level_id' => 'required',
-            'price_id' => 'required'
+            'price_id' => 'required',
+            'file' => 'image'
         ]);
 
         $course = Course::create($request->all());
@@ -103,9 +104,39 @@ class CourseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Course $course)
     {
-        //
+
+        $request->validate([
+            'title' => 'required',
+            'slug'  => 'required|unique:courses,slug,'.$course->id,//valida q sea unico y q no lo compare consigomismo
+            'subtitle' => 'required',
+            'description' => 'required',
+            'category_id' => 'required',
+            'level_id' => 'required',
+            'price_id' => 'required',
+            'file' => 'image'
+        ]);
+
+        $course->update($request->all());
+
+        if($request->file('file')){
+            $url = Storage::put('cursos',$request->file('file'));
+            
+            if($course->image){
+                Storage::delete($course->image->url);
+                $course->image->update([
+                    'url' => $url
+                ]);
+            }else{
+                $course->image()->create([
+                    'url' => $url
+                ]);
+            }
+
+        }
+
+        return redirect()->route('instructor.courses.edit',$course);
     }
 
     /**
