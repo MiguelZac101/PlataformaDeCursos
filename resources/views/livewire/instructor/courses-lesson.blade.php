@@ -1,10 +1,10 @@
 <div>
     @foreach ($section->lessons as $item)
-        <article class="card mt-4">
+        <article class="card mt-4 border-2 p-4">
             <div class="card-body">
 
                 @if ($item->id == $lesson->id)
-                    <div>
+                    <form wire:submit.prevent="update">
                         <div class="flex items-center">
                             <label class="w-32">Nombre:</label>
                             <input wire:model="lesson.name" class="form-input w-full">
@@ -31,10 +31,10 @@
                         @enderror
 
                         <div class="mt-4 flex justify-end">
-                            <button class="btn btn-danger" wire:click="cancel">Cancelar</button>
-                            <button class="btn btn-primary ml-2" wire:click="update">Actualizar</button>
+                            <button wire:click="cancel" type="button" class="border-2 px-2 bg-red-200" >Cancelar</button>
+                            <button type="submit" class="border-2 px-2 ml-2 bg-blue-200" >Actualizar</button>
                         </div>
-                    </div>
+                    </form>
                 @else
                     <header>
                         <h1><i class="far fa-play-circle text-blue-500 mr-i"></i>Lección: {{$item->name}}</h1>
@@ -45,9 +45,14 @@
                         <p class="text-sm">Enlace: <a class="text-blue-600" href="{{$item->url}}" target="_blank">{{$item->url}}</a></p>
 
                         <div class="mt-2">
-                            <button wire:click="edit({{$item}})" class="btn btn-primary text-sm">Editar</button>
-                            <button wire:click="destroy({{$item}})" class="btn btn-danger text-sm">Eliminar</button>
+                            <button wire:click="edit({{$item}})" class="border-2 px-2 text-sm bg-blue-200">Editar</button>
+                            <button wire:click="destroy({{$item}})" class="border-2 px-2 text-sm bg-red-200">Eliminar</button>
                         </div>
+
+                        <div>
+                            @livewire('instructor.lesson-description', ['lesson' => $item], key($item->id))
+                        </div>
+
                     </div>
                 @endif
             </div>            
