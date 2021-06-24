@@ -53,6 +53,25 @@
                             <a href="{{route('instructor.courses.students',$course)}}">Estudiantes</a>
                         </li>
                     </ul>
+
+                    @switch($course->status)
+                        @case(1)
+                            <form action="{{route('instructor.courses.status',$course)}}" method="POST" class="ml-2">
+                                @csrf
+                                <button type="submit" class="bg-red-300 p-2">
+                                    Solicitar Revisión
+                                </button>
+                            </form>
+                            @break
+                        @case(2)
+                            <p class="ml-2 bg-yellow-300 p-2">Curso en revisión</p>                            
+                            @break
+                        @case(3)
+                            <p class="ml-2 bg-blue-400 p-2">Curso Públicado</p>                            
+                            @break                            
+                    @endswitch
+                    
+
                 </aside>
                 <div class="col-span-4 card">
                     <main class="card-body text-gray-600">

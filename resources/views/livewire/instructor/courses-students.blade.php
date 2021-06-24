@@ -1,8 +1,4 @@
 <div>
-    <x-slot name="course">
-        {{$course->slug}}
-    </x-slot>
-
     <div class="container mx-auto px-4 sm:px-8">
         <div class="py-8">
             <div>
