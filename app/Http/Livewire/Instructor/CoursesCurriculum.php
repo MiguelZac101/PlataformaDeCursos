@@ -7,8 +7,14 @@ use Livewire\Component;
 
 use App\Models\Section;
 
+//libreria necesaria para usar los policies
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+
 class CoursesCurriculum extends Component
 {
+    //uso libreria necesaria para usar los policies
+    use AuthorizesRequests;
+
     public $course,$section,$name;
 
     protected $rules = [
@@ -18,6 +24,10 @@ class CoursesCurriculum extends Component
     public function mount(Course $course){
         $this->course = $course;
         $this->section = new Section();
+
+        //verifica que el usuario q accede sea el autor, es un policie
+        //función 'dicatated' de app/Policies/CoursePolicy
+        $this->authorize('dicatated',$course);
     }
 
     public function render()

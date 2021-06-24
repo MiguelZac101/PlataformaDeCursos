@@ -34,4 +34,14 @@ class CoursePolicy
         if($course->status == 3) $result = true;
         return $result;
     }
+
+    //caso q un instructor modifique un curso q no le pertenece
+    // llega copiando la url del curso
+    public function dicatated(User $user,Course $course){
+        if($course->user_id == $user->id){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

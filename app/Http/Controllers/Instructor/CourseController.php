@@ -14,6 +14,13 @@ use Illuminate\Support\Facades\Storage;
 
 class CourseController extends Controller
 {
+    public function __construct(){
+        $this->middleware('can:Leer Cursos')->only('index');
+        $this->middleware('can:Crear Cursos')->only('create','store');
+        $this->middleware('can:Actualizar Cursos')->only('edit','update','goals');
+        $this->middleware('can:Eliminar Cursos')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -90,6 +97,10 @@ class CourseController extends Controller
      */
     public function edit(Course $course)
     {
+        //llamando a función 'dicatated' de app/Policies/CoursePolicy
+        //para restringir la edición de curso por otro instructor que no sea el autor
+        $this->authorize('dicatated',$course);
+
         $categories = Category::pluck('name','id');
         $levels = Level::pluck('name','id');
         $prices = Price::pluck('name','id');
@@ -106,6 +117,8 @@ class CourseController extends Controller
      */
     public function update(Request $request, Course $course)
     {
+        
+        $this->authorize('dicatated',$course);
 
         $request->validate([
             'title' => 'required',

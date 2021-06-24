@@ -14,8 +14,8 @@ Route::redirect('', 'instructor/courses');
 //Route::get('courses', InstructorCourses::class)->middleware('can:Leer Cursos')->name('courses.index');
 Route::resource('courses', CourseController::class)->names('courses');
 
-Route::get('courses/{course}/curriculum',CoursesCurriculum::class)->name('courses.curriculum');
+Route::get('courses/{course}/curriculum',CoursesCurriculum::class)->middleware('can:Actualizar Cursos')->name('courses.curriculum');
 
 Route::get('courses/{course}/goals',[CourseController::class,'goals'])->name('courses.goals');
 
-Route::get('courses/{course}/students',CoursesStudents::class)->name('courses.students');
+Route::get('courses/{course}/students',CoursesStudents::class)->middleware('can:Actualizar Cursos')->name('courses.students');
