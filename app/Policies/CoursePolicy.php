@@ -44,4 +44,14 @@ class CoursePolicy
             return false;
         }
     }
+
+    //verificar q el curso tenga estatus 2 = 'solicitud de revición'
+    public function revision(User $user,Course $course){
+        if($course->status == 2){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 }

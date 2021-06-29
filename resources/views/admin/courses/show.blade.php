@@ -15,6 +15,14 @@
         </div>
     </section>
     <div class="container grid grid-cols-3">
+        @if (session('mensaje'))
+        <div class="col-span-3">
+            <div class="text-red-500 border-red-600 p-4 m-4">
+                Error: {{session('mensaje')}}
+            </div>
+        </div>   
+        @endif
+        
         <div class="col-span-2">
             <section>
                 <div>
@@ -82,36 +90,14 @@
                             </a>
                         </div>
                     </div>
-                    <!--Policies/CoursePolicy.php-->
-                    @can('enrolled',$course)
-                        <a href="{{route('courses.status',$course)}}">
-                            Continuar con el curso
-                        </a>
-                    @else
-                        <form action="{{route('course.enrolled',$course)}}" method="POST">
-                            @csrf
-                            <button class="bg-blue-400 p-4">Llevar este curso</button>
-                        </form>
-                    @endcan
+                    
+                    <form action="{{route('admin.courses.publicar',$course)}}" method="POST">
+                        @csrf
+                        <button class="bg-blue-400 p-4">Publicar Curso</button>
+                    </form>
+                    
                 </div>
-            </section>
-            
-            @isset($similares)
-            <aside class="mt-4">
-                @foreach ($similares as $similar )
-                    <article>
-                        <img src="{{Storage::url($similar->image->url)}}" alt="">
-                        <div>
-                            <h1>
-                                <a href="{{route('courses.show',$similar)}}">
-                                    {{Str::limit($similar->title,40)}}
-                                </a>
-                            </h1>
-                        </div>
-                    </article>
-                @endforeach
-            </aside>
-            @endisset
+            </section> 
 
         </div>
     </div>

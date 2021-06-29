@@ -13,3 +13,7 @@ Route::resource('roles',RoleController::class)->names('roles');
 Route::resource('users',UserController::class)->only(['index','edit','update'])->names('users');
 
 Route::get('courses',[CourseController::class,'index'])->name('courses.index');
+//show
+Route::get('courses/{course}',[CourseController::class,'show'])->name('courses.show');
+//publicar
+Route::post('courses/{course}/publicar',[CourseController::class,'publicar'])->name('courses.publicar');

@@ -4,6 +4,11 @@
 
 @section('content_header')
     <h1>Cursos Pendientes de Aprobación</h1>
+    @if (session('mensaje'))
+        <div class="text-red-500">
+            {{session('mensaje')}}
+        </div>
+    @endif
 @stop
 
 @section('content')
@@ -14,7 +19,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Categoria</th>
+                        <th>Categoria</th>                        
                         <th></th>
                     </tr>
                 </thead>
@@ -25,7 +30,7 @@
                             <td>{{$course->title}}</td>
                             <td>{{$course->category->name}}</td>                            
                             <td>
-                                <a href="" class="btn btn-primary">Revisar</a>
+                                <a href="{{route('admin.courses.show',$course)}}" class="btn btn-primary">Revisar</a>
                             </td>
                         </tr>
                     @endforeach
