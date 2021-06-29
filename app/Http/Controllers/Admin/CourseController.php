@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 
 use App\Models\Course;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\AprobarCurso;
+
 class CourseController extends Controller{
 
     public function index(){
@@ -24,7 +27,7 @@ class CourseController extends Controller{
     public function publicar(Course $course){
         //policie, revisa q el estado del curso sea 2 pendiente de revisión
         $this->authorize('revision',$course);
-        
+
         //validación
         if(!$course->goals){
             return back()->with('mensaje','falto alguna valicación');
@@ -32,6 +35,10 @@ class CourseController extends Controller{
 
         $course->status = 3;//publicado
         $course->save();
+
+        //enviar correo 
+        $mail = new AprobarCurso($course);
+        Mail::to($course->teacher->email)->send($mail);
 
         return redirect()->route('admin.courses.index')->with('mensaje','curso publicado!');
     }
