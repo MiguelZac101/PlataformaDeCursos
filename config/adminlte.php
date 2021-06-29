@@ -272,6 +272,12 @@ return [
             'icon' => 'fas fa-fw fa-user',
         ],
         [
+            'text' => 'Categorias',
+            'route'  => 'admin.categorias.index',
+            'icon' => 'fas fa-fw fa-user',
+            'active' => ['admin/categorias*']
+        ],
+        [
             'text' => 'change_password',
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-lock',
