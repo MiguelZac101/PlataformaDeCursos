@@ -9,6 +9,7 @@ use App\Models\Course;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\AprobarCurso;
+use App\Mail\RechazarCurso;
 
 class CourseController extends Controller{
 
@@ -41,5 +42,21 @@ class CourseController extends Controller{
         Mail::to($course->teacher->email)->queue($mail);
 
         return redirect()->route('admin.courses.index')->with('mensaje','curso publicado!');
+    }
+
+    public function observado(Course $course){
+        return view('admin.courses.observado',compact('course'));
+    }
+
+    public function reject(Request $request, Course $course){
+        $course->observation()->create($request->all());
+        $course->status = 1;//borrador
+        $course->save();
+
+        //enviar correo 
+        $mail = new RechazarCurso($course);
+        Mail::to($course->teacher->email)->queue($mail);
+
+        return redirect()->route('admin.courses.index')->with('mensaje','curso RECHAZADO!');
     }
 }

@@ -17,3 +17,7 @@ Route::get('courses',[CourseController::class,'index'])->name('courses.index');
 Route::get('courses/{course}',[CourseController::class,'show'])->name('courses.show');
 //publicar
 Route::post('courses/{course}/publicar',[CourseController::class,'publicar'])->name('courses.publicar');
+//observado
+Route::get('courses/{course}/observado',[CourseController::class,'observado'])->name('courses.observado');
+
+Route::post('courses/{course}/reject',[CourseController::class,'reject'])->name('courses.reject');

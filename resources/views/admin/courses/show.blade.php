@@ -93,9 +93,11 @@
                     
                     <form action="{{route('admin.courses.publicar',$course)}}" method="POST">
                         @csrf
-                        <button class="bg-blue-400 p-4">Publicar Curso</button>
+                        <button class="bg-blue-400 p-4 w-full">Publicar Curso</button>
                     </form>
-                    
+                    <a href="{{route('admin.courses.observado',$course)}}" class="bg-red-400 p-4 w-full block mt-4 text-center cursor-pointer">
+                        Observar Curso
+                    </a>
                 </div>
             </section> 
 

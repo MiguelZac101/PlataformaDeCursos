@@ -170,7 +170,17 @@ class CourseController extends Controller
     public function status(Course $course){
         $course->status = 2;
         $course->save();
-        return back();
+
+        //eliminar observaciones si tiene
+        if($course->observation){
+            $course->observation->delete();
+        }
+
+        return redirect()->route('instructor.courses.edit',$course);
+    }
+
+    public function observacion(Course $course){
+        return view('instructor.courses.observacion',compact('course'));
     }
 
 }

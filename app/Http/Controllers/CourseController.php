@@ -31,6 +31,6 @@ class CourseController extends Controller
         //añadir registro en tabla intermedia
         $course->students()->attach(auth()->user()->id);
         return redirect()->route('course.status',$course);
-    }
+    }    
 
 }
